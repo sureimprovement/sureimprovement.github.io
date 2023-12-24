@@ -316,7 +316,7 @@ h1::after {
 
 /* Section: Counters */
 .section-counters {
-    background: url(../img/counters-bg.png) no-repeat fixed center / cover;
+    background: url(../img/counters-bg.jpg) no-repeat fixed center / cover;
     width: 100%;
     padding: 100px 0;
     position: relative;
