@@ -18,12 +18,12 @@
             /*====================================
              ON SCROLL ANIMATION SCRIPTS 
             ======================================*/
-           
-            
+
+
             window.scrollReveal = new scrollReveal();
 
         },
-         scroll_fun: function () {
+        scroll_fun: function () {
 
             /*====================================
                  EASING PLUGIN SCRIPTS 
@@ -40,34 +40,58 @@
 
         },
 
-         top_flex_slider_fun:function()
-         {
-             /*====================================
-              FLEX SLIDER SCRIPTS 
-             ======================================*/
-             $('#main-section').flexslider({
-                 animation: "fade", //String: Select your animation type, "fade" or "slide"
-                 slideshowSpeed: 3000,           //Integer: Set the speed of the slideshow cycling, in milliseconds
-                 animationSpeed: 1000,           //Integer: Set the speed of animations, in milliseconds
-                 startAt: 0,    //Integer: The slide that the slider should start on. Array notation (0 = first slide)
-
-             });
-         },
-      
-        custom_fun:function()
-        {
+        top_flex_slider_fun: function () {
             /*====================================
-             WRITE YOUR   SCRIPTS  BELOW
+             FLEX SLIDER SCRIPTS 
             ======================================*/
+            $('#main-section').flexslider({
+                animation: "fade", //String: Select your animation type, "fade" or "slide"
+                slideshowSpeed: 3000,           //Integer: Set the speed of the slideshow cycling, in milliseconds
+                animationSpeed: 1000,           //Integer: Set the speed of animations, in milliseconds
+                startAt: 0,    //Integer: The slide that the slider should start on. Array notation (0 = first slide)
 
+            });
+        },
 
+        custom_fun: function () {
+            /* Counters  */
+            if ($(".section-counters .start").length > 0) {
+                $(".section-counters .start").each(function () {
+                    var stat_item = $(this),
+                        offset = stat_item.offset().top;
+                    $(window).scroll(function () {
+                        if ($(window).scrollTop() > (offset - 1000) && !(stat_item.hasClass('counting'))) {
+                            stat_item.addClass('counting');
+                            stat_item.countTo();
+                        }
+                    });
+                });
+            };
+
+            // another custom callback for counting to infinity
+            $('#infinity').data('countToOptions', {
+                onComplete: function (value) {
+                    count.call(this, {
+                        from: value,
+                        to: value + 1
+                    });
+                }
+            });
+
+            $('#infinity').each(count);
+
+            function count(options) {
+                var $this = $(this);
+                options = $.extend({}, options || {}, $this.data('countToOptions') || {});
+                $this.countTo(options);
+            }
 
 
         },
 
     }
-   
-   
+
+
     $(document).ready(function () {
         mainApp.scrollAnimation_fun();
         mainApp.scroll_fun();
